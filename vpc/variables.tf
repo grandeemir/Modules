@@ -1,0 +1,19 @@
+variable "project_name" {
+  type = string
+}
+
+variable "cidr_block" {
+  type = string
+}
+
+variable "availability_zone" {
+  type = string
+}
+
+variable "availability_zone_2" {
+  type = string
+}
+
+variable "public_subnet_cidrs" {
+
+}
