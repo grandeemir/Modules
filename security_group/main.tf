@@ -2,7 +2,7 @@
 resource "aws_security_group" "elb_sg" {
   name        = "${var.project_name}-elb-sg"
   description = "Security group for ELB"
-  vpc_id      = var.vpc_id
+  vpc_id      = aws.vpc.vpc_id
 
   ingress {
     from_port   = 80
@@ -27,7 +27,7 @@ resource "aws_security_group" "elb_sg" {
 resource "aws_security_group" "ec2_sg" {
   name        = "${var.project_name}-ec2-sg"
   description = "Security group for EC2 instances"
-  vpc_id      = var.vpc_id
+  vpc_id      = aws.vpc.vpc_id
 
   ingress {
     from_port   = 22
@@ -36,11 +36,11 @@ resource "aws_security_group" "ec2_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  ingress = {
+  ingress  {
     from_port       = 80
     to_port         = 80
     protocol        = "tcp"
-    security_groups = [var.elb_sg_id]
+    security_groups = [aws_security_group.elb_sg.id]
   }
 
   tags = {
@@ -51,13 +51,13 @@ resource "aws_security_group" "ec2_sg" {
 resource "aws_security_group" "asg_sg" {
   name        = "${var.project_name}-asg-sg"
   description = "Security group for ASG instances"
-  vpc_id      = var.vpc_id
+  vpc_id      = aws.vpc.vpc_id
 
   ingress {
     from_port       = 80
     to_port         = 80
     protocol        = "tcp"
-    security_groups = [var.elb_sg_id]
+    security_groups = [aws_security_group.elb_sg.id]
   }
 
   tags = {
@@ -69,14 +69,22 @@ resource "aws_security_group" "asg_sg" {
 resource "aws_security_group" "rds_sg" {
   name        = "${var.project_name}-rds-sg"
   description = "Security group for RDS instances"
-  vpc_id      = var.vpc_id
+  vpc_id      = aws.vpc.vpc_id
 
   ingress {
     from_port       = 3306
     to_port         = 3306
     protocol        = "tcp"
-    security_groups = [var.asg_sg_id]
+    security_groups = [aws_security_group.asg_sg.id]
   }
+
+  ingress {
+    from_port       = 3306
+    to_port         = 3306
+    protocol        = "tcp"
+    security_groups = [aws_security_group.ec2_sg.id]
+  }
+
   tags = {
     Name = "${var.project_name}-rds-sg"
   }

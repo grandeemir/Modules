@@ -29,8 +29,7 @@ resource "aws_lb_target_group_attachment" "this" {
 resource "aws_alb" "this" {
   name            = "${var.project_name}-alb"
   internal        = false
-  security_groups = [var.elb_sg]
-  subnets         = [var.public_subnet_1a, var.public_subnet_1b]
+  subnets         = [var.public_subnet_ids[0], var.public_subnet_ids[1]]
 
   tags = {
     Name = "${var.project_name}-alb"
