@@ -1,4 +1,4 @@
-# Launch Template for EC2 instances
+#   
 resource "aws_launch_template" "this" {
   name_prefix   = "${var.project_name}-lt-"
   image_id      = var.ami_id
