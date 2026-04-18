@@ -1,4 +1,5 @@
 # AWS Infrastructure Terraform Modules
+![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/grandeemir/Modules?label=latest%20version&style=for-the-badge&color=blue)
 
 A collection of professional, reusable, and versioned Terraform modules for deploying scalable AWS infrastructure. These modules follow **DRY (Don't Repeat Yourself)** principles and are designed for high availability and security.
 
