@@ -13,7 +13,3 @@ variable "availability_zone" {
 variable "availability_zone_2" {
   type = string
 }
-
-variable "public_subnet_cidrs" {
-
-}
