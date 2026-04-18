@@ -20,7 +20,7 @@ resource "aws_lb_target_group" "this" {
 
 resource "aws_lb_target_group_attachment" "this" {
   target_group_arn = aws_lb_target_group.this.arn
-  target_id        = aws_instance.web.id
+  target_id        = aws_lb_target_group.this
   port             = var.elb_port
 
 }

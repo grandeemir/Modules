@@ -40,7 +40,7 @@ resource "aws_security_group" "ec2_sg" {
     from_port       = 80
     to_port         = 80
     protocol        = "tcp"
-    security_groups = [aws_security_group.elb_sg]
+    security_groups = [var.elb_sg_id]
   }
 
   tags = {
@@ -57,7 +57,7 @@ resource "aws_security_group" "asg_sg" {
     from_port       = 80
     to_port         = 80
     protocol        = "tcp"
-    security_groups = [aws_security_group.elb_sg]
+    security_groups = [var.elb_sg_id]
   }
 
   tags = {
@@ -75,7 +75,7 @@ resource "aws_security_group" "rds_sg" {
     from_port       = 3306
     to_port         = 3306
     protocol        = "tcp"
-    security_groups = [aws_security_group.ec2_sg]
+    security_groups = [var.asg_sg_id]
   }
   tags = {
     Name = "${var.project_name}-rds-sg"
