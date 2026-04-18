@@ -18,6 +18,6 @@ To use these modules in your projects, reference them via Git tags to ensure inf
 
 ```hcl
 module "vpc" {
-  source = "git::[https://github.com/grandeemir/modules.git//modules/vpc?ref=v1.0.0](https://github.com/grandeemir/modules.git//modules/vpc?ref=v1.0.0)"
+  source = "git::[https://github.com/grandeemir/Modules.git//vpc?ref=v1.1.0]
 
 }
