@@ -15,14 +15,14 @@ resource "aws_lb_target_group" "this" {
 
   tags = {
     Name = "${var.project_name}-tg"
-  } 
+  }
 }
 
 resource "aws_lb_target_group_attachment" "this" {
   target_group_arn = aws_lb_target_group.this.arn
   target_id        = aws_instance.web.id
   port             = var.elb_port
-  
+
 }
 
 # ALB (Application Load Balancer) configuration
@@ -34,5 +34,5 @@ resource "aws_alb" "this" {
 
   tags = {
     Name = "${var.project_name}-alb"
-  } 
+  }
 }

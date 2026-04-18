@@ -11,17 +11,17 @@ resource "aws_launch_template" "this" {
   }
 
   user_data = var.user_data
-  
+
 }
 
 # Auto Scaling Group for EC2 instances
 resource "aws_autoscaling_group" "this" {
-  name                      = "${var.project_name}-asg"
-  max_size                  = var.asg_max_size
-  min_size                  = var.asg_min_size
-  desired_capacity          = var.asg_desired_capacity
-  vpc_zone_identifier       = [var.public_subnet_ids[0], var.public_subnet_ids[1]]
-  
+  name                = "${var.project_name}-asg"
+  max_size            = var.asg_max_size
+  min_size            = var.asg_min_size
+  desired_capacity    = var.asg_desired_capacity
+  vpc_zone_identifier = [var.public_subnet_ids[0], var.public_subnet_ids[1]]
+
   launch_template {
     id      = aws_launch_template.this.id
     version = "$Latest"
@@ -36,5 +36,5 @@ resource "aws_autoscaling_group" "this" {
     value               = "${var.project_name}-asg-instance"
     propagate_at_launch = true
   }
-  
+
 }
