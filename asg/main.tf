@@ -3,11 +3,9 @@ resource "aws_launch_template" "this" {
   name_prefix   = "${var.project_name}-lt-"
   image_id      = var.ami_id
   instance_type = var.instance_type
-  key_name      = null
 
   network_interfaces {
     security_groups = [var.asg_sg_id]
-    subnet_id       = var.public_subnet_ids[0]
   }
 
   user_data = var.user_data
@@ -17,9 +15,9 @@ resource "aws_launch_template" "this" {
 # Auto Scaling Group for EC2 instances
 resource "aws_autoscaling_group" "this" {
   name                = "${var.project_name}-asg"
-  max_size            = var.asg_max_size
-  min_size            = var.asg_min_size
-  desired_capacity    = var.asg_desired_capacity
+  max_size            = var.max_size
+  min_size            = var.min_size
+  desired_capacity    = var.desired_capacity
   vpc_zone_identifier = [var.public_subnet_ids[0], var.public_subnet_ids[1]]
 
   launch_template {
@@ -36,5 +34,4 @@ resource "aws_autoscaling_group" "this" {
     value               = "${var.project_name}-asg-instance"
     propagate_at_launch = true
   }
-
 }

@@ -2,15 +2,15 @@ variable "project_name" {
   type = string
 }
 
-variable "asg_max_size" {
+variable "max_size" {
   type = number
 }
 
-variable "asg_min_size" {
+variable "min_size" {
   type = number
 }
 
-variable "asg_desired_capacity" {
+variable "desired_capacity" {
   type = number
 }
 

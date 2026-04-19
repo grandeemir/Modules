@@ -15,5 +15,9 @@ variable "availability_zone_2" {
 }
 
 variable "public_subnet_cidrs" {
+  type = list(string)
+}
 
+variable "private_subnet_cidrs" {
+  type = list(string)
 }
